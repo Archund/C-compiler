@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gcc -o bin/exec main.c global.h start.c symbols.c sintax.c lexor.c error.c emitter.c
