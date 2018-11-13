@@ -11,6 +11,8 @@
 #define ID  259 
 #define END 260
 
+#define MAXSYMBOLS 100
+
 
 
 int valcomplex; 
@@ -21,7 +23,7 @@ struct entry {
   int complex;
 };
 
-struct entry symbolList[BUFFER]; //TODO- size not known (temp BUFFER)
+struct entry symbolList[MAXSYMBOLS]; //TODO- size not known (temp BUFFER)
 
 
 void error(char *m);

@@ -1,8 +1,10 @@
 #include "global.h"
 
 int main() {
-  start();
-  sintaxAnalyzer();
-  return 0;
+    printf(">>>>Program Start\n");
+    start();
+    sintaxAnalyzer();
+    printf(">>>>Program End\n");
+    return 0;
   
 }//end main()
