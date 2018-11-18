@@ -10,7 +10,25 @@ void emitter(int t, int tval) { /* genera  la salida  */
     break;
     case MOD:
       printf("MOD\n");
-      break;
+    break;
+    case IF:
+      printf("IF\n");
+    break;
+    case THEN:
+      printf("THEN\n");
+    break;
+    case WHILE:
+      printf("WHILE\n");
+    break;
+    case DO:
+      printf("DO\n");
+    break;
+    case BEGIN:
+      printf("BEGIN\n");
+    break;
+    case ENDO:
+      printf("ENDO\n");
+    break;
     case NUM:
       printf("%d\n", tval); 
     break;

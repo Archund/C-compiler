@@ -4,39 +4,34 @@ int preanalisis;
 
 
 void sintaxAnalyzer() {   
-    printf(">>>Start Syntax Analyzer\n");
+    printf(">>>>Start Syntax Analyzer\n");
     preanalisis = lexicalAnalyzer();
     while ( preanalisis != END  ) {
-        expression(); pair(';');
+        props_opc();//?
+        //expression(); pair(';');
     }
-    printf(">>>End Syntax Analyzer\n");
+    printf("<<<<End Syntax Analyzer\n");
 }//end sintaxAnalyzer()
 
 void expression(){
-
-    int searching = 1;
-
-    printf(">>Start Expression()\n");
+    printf(">>Start Expression\n");
     int t;
     term(); 
-    while (searching == 1) {
+    while (1) {
         switch ( preanalisis ) { 
             case '+': case '-': 
                 t = preanalisis;
-                pair(preanalisis);
-                term();
-                emitter(t, EMPTY);
+                pair(preanalisis); term(); emitter(t, EMPTY);
                 continue;
             default:
-                searching = 0;
-                break;
+                printf("<<End Expression\n");
+                return;
         }
     }
-    printf(">>End Expression?\n");
 }//end expression()
     
-void term() { //TODO
-    printf(">>Start Term()\n");
+void term() { 
+    printf(">>Start Term\n");
     int t;
     factor();
     while(1) {
@@ -46,14 +41,14 @@ void term() { //TODO
                 pair(preanalisis); factor(); emitter(t, EMPTY);
                 continue;
             default:
-                printf(">>End Term\n");
+                printf("<<End Term\n");
                 return;
         }
     }
 }//end term()
 
 void factor() {
-    printf(">>Start Factor()\n");
+    printf(">>Start Factor\n");
     switch( preanalisis ) { 
         case '(':
             pair('('); expression(); pair(')');
@@ -66,8 +61,9 @@ void factor() {
             break;
         default:
             error("Sintax Error");
+            break;
     }
-    printf(">>End Factor\n");
+    printf("<<End Factor\n");
 }//end factor()
 
 void pair(int t) {
@@ -76,5 +72,59 @@ void pair(int t) {
         preanalisis = lexicalAnalyzer();
     else 
         error("Sintax Error");
-    printf(">>End Pair\n");
+    printf("<<End Pair\n");
 }//end pair()
+
+
+void prop() {           //?
+    printf(">>Start prop\n");
+    switch( preanalisis ) { 
+        case ID:
+            emitter(ID, valcomplex); pair(ID); pair(':'); pair('='); expression(); 
+            break;
+        case IF:
+            pair(IF); emitter(IF, EMPTY); expression(); pair(THEN); emitter(THEN, EMPTY); prop();
+            break;
+        case WHILE:
+            pair(WHILE); emitter(WHILE, EMPTY); expression(); pair(DO); emitter(DO, EMPTY); prop();
+            break;
+        case BEGIN:
+            pair(BEGIN); emitter(BEGIN, EMPTY); props_opc(); pair(ENDO); emitter(ENDO, EMPTY);
+            break;
+        default:
+            error("Sintax Error");
+            break;
+    }
+    printf("<<End prop\n");
+}//end prop()
+
+void props_opc() {      //?
+    printf(">>Start props_opc\n");
+    lista_props();
+    /* switch ( preanalisis ) {
+        case '?':
+            lista_props();
+            break;
+        default:
+            printf("<<End props_opc\n");
+            break; 
+    } */
+    printf("<<End props_opc\n");
+}//end props_opc()
+
+void lista_props() {    //?
+    printf(">>Start lista_props\n");
+    int t;
+    prop();
+    while(1) {
+        switch ( preanalisis ) {
+            case ';':
+                t = preanalisis;
+                pair(preanalisis); prop(); emitter(t, EMPTY);
+                continue;
+            default:
+                printf("<<End lista_props\n");
+                return;
+        }
+    }
+}//end lista_props()
