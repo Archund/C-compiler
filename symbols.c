@@ -5,14 +5,14 @@
 
 char lexemas[MAXLEX];
 int lastLexmas = -1;          /*  última posición usada en  los  lexemas  */
-struct entry symbolList[MAXSYMBOLS];
-int lastEntry = 0;           /*  última posición usada en symbolList */
+struct entry symbolTable[MAXSYMBOLS];
+int lastEntry = 0;           /*  última posición usada en symbolTable */
 
 int find(char s[]) {    /* devuelve  la posición del elemento de entryde s */
     printf(">>Start find for %s\n",s);
     int p;
     for (p = lastEntry; p>0; p = p-1)
-        if (strcmp(symbolList[p].aplex, s) == 0)
+        if (strcmp(symbolTable[p].aplex, s) == 0)
             return p;
     return 0;
 }//end find()
@@ -27,10 +27,10 @@ int insert(char s[], int clex) {  /* devuelve  la posición del elemento deentry
         error("Lexmas Matrix full");
 
     lastEntry++;
-    symbolList[lastEntry].complex = clex;
-    symbolList[lastEntry].aplex = &lexemas[lastLexmas + 1];
+    symbolTable[lastEntry].complex = clex;
+    symbolTable[lastEntry].aplex = &lexemas[lastLexmas + 1];
     lastLexmas = lastLexmas + lon + 1;
-    strcpy( symbolList[lastEntry].aplex, s );
+    strcpy( symbolTable[lastEntry].aplex, s );
     printf(">>End Insert\n");
     return lastEntry;
 }//end insert()

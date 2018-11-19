@@ -15,9 +15,9 @@ void emitter(int t, int tval) { /* genera  la salida  */
       printf("%d\n", tval); 
     break;
     case ID:
-      printf("%s\n", symbolList[tval].aplex);
+      printf("%s\n", symbolTable[tval].aplex);
     break;
     default:
-      printf("complex %d,  valcomplex %d\n", t, tval);
+      printf("complex %d,  tokenVal %d\n", t, tval);
   }
 }//end emitter()

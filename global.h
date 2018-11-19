@@ -1,29 +1,32 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define BUFFER 128 
-#define EMPTY -1 
-#define EOL '\0'
+#define BUFFER      128 
+#define NONE        -1 
+#define EOS         '\0'
 
-#define NUM 256 
-#define DIV 257 
-#define MOD 258 
-#define ID  259 
-#define END 260
+#define NUM         256 
+#define DIV         257 
+#define MOD         258 
+#define ID          259 
+#define DONE        260
 
-#define MAXSYMBOLS 100
+#define MAXSYMBOLS  100
 
 
 
-int valcomplex; 
+int tokenVal; 
 int lineNum;
 
+
+//Symbol Table Entry
 struct entry {
-  char *aplex; 
-  int complex;
+    char *aplex; 
+    int complex;
 };
 
-struct entry symbolList[MAXSYMBOLS]; //TODO- size not known (temp BUFFER)
+//SymbolTable
+struct entry symbolTable[MAXSYMBOLS]; //TODO- size not known (temp BUFFER)
 
 
 void error(char *m);

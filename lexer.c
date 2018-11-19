@@ -2,7 +2,7 @@
 
 char buflex[BUFFER];
 int lineNum = 1;
-int valcomplex = EMPTY;
+int tokenVal = NONE;
 
 int lexicalAnalyzer() {  
     printf(">>Start Lexical Analyzer\n");
@@ -17,7 +17,7 @@ int lexicalAnalyzer() {
             lineNum++;
         else if ( isdigit(t) ) {   
             ungetc(t, stdin);
-            scanf("%d", &valcomplex);
+            scanf("%d", &tokenVal);
             printf(">>End Lexical Analyzer\n");
             return NUM;
         }
@@ -30,22 +30,22 @@ int lexicalAnalyzer() {
                 if ( b >= BUFFER )
                     error("Compiler eror");
             }
-            buflex[b]  =  EOL;
+            buflex[b]  =  EOS;
             if (t != EOF)
                 ungetc(t, stdin);
             p = find(buflex);
             if (p == 0)
                 p = insert(buflex, ID);
-            valcomplex = p;
+            tokenVal = p;
             printf(">>End Lexical Analyzer\n");
-            return symbolList[p].complex;
+            return symbolTable[p].complex;
         }
         else if (t == EOF){
             printf(">>End Lexical Analyzer\n");
-            return END;
+            return DONE;
         }
         else {
-            valcomplex = EMPTY;
+            tokenVal = NONE;
             printf(">>End Lexical Analyzer\n");
             return t;
         }

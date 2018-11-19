@@ -6,7 +6,7 @@ int preanalisis;
 void sintaxAnalyzer() {   
     printf(">>>Start Syntax Analyzer\n");
     preanalisis = lexicalAnalyzer();
-    while ( preanalisis != END  ) {
+    while ( preanalisis != DONE  ) {
         expression(); pair(';');
     }
     printf(">>>End Syntax Analyzer\n");
@@ -25,7 +25,7 @@ void expression(){
                 t = preanalisis;
                 pair(preanalisis);
                 term();
-                emitter(t, EMPTY);
+                emitter(t, NONE);
                 continue;
             default:
                 searching = 0;
@@ -43,7 +43,7 @@ void term() { //TODO
         switch ( preanalisis ) {
             case '*': case '/': case DIV: case MOD:
                 t = preanalisis;
-                pair(preanalisis); factor(); emitter(t, EMPTY);
+                pair(preanalisis); factor(); emitter(t, NONE);
                 continue;
             default:
                 printf(">>End Term\n");
@@ -59,10 +59,10 @@ void factor() {
             pair('('); expression(); pair(')');
             break;
         case NUM:
-            emitter(NUM, valcomplex); pair(NUM);
+            emitter(NUM, tokenVal); pair(NUM);
             break;
         case ID:
-            emitter(ID, valcomplex); pair(ID);  
+            emitter(ID, tokenVal); pair(ID);  
             break;
         default:
             error("Sintax Error");
