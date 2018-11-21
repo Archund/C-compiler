@@ -7,10 +7,10 @@ struct entry keywords[] = {
 };
 
 void start(){
-    printf(">>>Start function\n");
+    //printf(">>>Start function\n");
     struct entry *p;
     for (p = keywords; p->complex; p++)
         insert(p->aplex, p->complex);
     
-    printf(">>>End Start function\n");
+    //printf(">>>End Start function\n");
 }//end start()

@@ -9,7 +9,7 @@ struct entry symbolTable[MAXSYMBOLS];
 int lastEntry = 0;           /*  última posición usada en symbolTable */
 
 int find(char s[]) {    /* devuelve  la posición del elemento de entryde s */
-    printf(">>Start find for %s\n",s);
+    //printf(">>Start find for %s\n",s);
     int p;
     for (p = lastEntry; p>0; p = p-1)
         if (strcmp(symbolTable[p].aplex, s) == 0)
@@ -18,7 +18,7 @@ int find(char s[]) {    /* devuelve  la posición del elemento de entryde s */
 }//end find()
 
 int insert(char s[], int clex) {  /* devuelve  la posición del elemento deentry de s  */
-    printf(">>Start insert of %s\n",s);
+    //printf(">>Start insert of %s\n",s);
     int lon;
     lon = strlen(s);            /*  strlen evalúa  la longitud de s  */
     if (lastEntry + 1 >= MAXSYMBOLS)
@@ -31,6 +31,6 @@ int insert(char s[], int clex) {  /* devuelve  la posición del elemento deentry
     symbolTable[lastEntry].aplex = &lexemas[lastLexmas + 1];
     lastLexmas = lastLexmas + lon + 1;
     strcpy( symbolTable[lastEntry].aplex, s );
-    printf(">>End Insert\n");
+    //printf(">>End Insert\n");
     return lastEntry;
 }//end insert()
