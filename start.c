@@ -3,19 +3,11 @@
 struct entry keywords[] = {
   {"div", DIV},
   {"mod", MOD},
-  {"if", IF},	//?
-  {"then", THEN},
-  {"while", WHILE},
-  {"do", DO},
-  {"begin", BEGIN},
-  {"end", END},
   {0,     0}
-  //anañdirlo a keywords?
 };
 
 void start(){
     printf(">>>Start function\n");
-
     struct entry *p;
     for (p = keywords; p->complex; p++)
         insert(p->aplex, p->complex);

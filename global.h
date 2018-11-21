@@ -5,7 +5,6 @@
 #define NONE        -1 
 #define EOS         '\0'
 
-
 #define NUM         256 
 #define DIV         257 
 #define MOD         258 
@@ -15,21 +14,6 @@
 #define MAXSYMBOLS  100
 
 
-#define NUM 256
-#define DIV 257 
-#define MOD 258 
-#define ID  259 
-#define END 260
-
-#define IF	261 //?
-#define THEN 262 //?
-#define WHILE 263 //?
-#define DO 264 //?
-#define BEGIN 265 //?
-#define ENDO 266 //?
-
-
-#define MAXSYMBOLS 100
 
 int tokenVal; 
 int lineNum;
@@ -51,9 +35,6 @@ void sintaxAnalyzer();
 void expression();
 void term();
 void factor();
-void prop();
-void props_opc();
-void lista_props();
 void pair(int t);
 void emitter(int t, int tval);
 void start();
