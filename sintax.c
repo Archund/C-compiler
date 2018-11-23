@@ -56,7 +56,7 @@ void factor() {
     //printf(">>Start Factor()\n");
     switch( preanalisis ) { 
         case '(':
-            pair('('); expression(); pair(')');
+             emitter('(', NONE); pair('('); expression(); emitter(')', NONE); pair(')');
             break;
         case NUM:
             emitter(NUM, tokenVal); pair(NUM);
