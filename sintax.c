@@ -6,7 +6,7 @@ void sintaxAnalyzer() {
     printf(">>>>Start Syntax Analyzer\n");
     preanalisis = lexicalAnalyzer();
     while ( preanalisis != END  ) {
-            props_opc(); pair(';');
+        props_opc(); pair(';');
         //props_opc();
         //expression(); pair(';');
     }
