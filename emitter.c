@@ -2,11 +2,11 @@
 
 void emitter(int t, int tval) { /* genera  la salida  */
   switch(t) {
-    case '+': case '-': case '/': 
-      printf("%c\n", t);  
+    case '+': case '-': case '*': case '/': case '(': case ')': 
+      printf("%c\n", t); 
     break;
     case DIV:
-      printf("DIV\n");  
+      printf("DIV\n");
     break;
     case MOD:
       printf("MOD\n");

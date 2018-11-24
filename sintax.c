@@ -2,12 +2,12 @@
 
 int preanalisis;
 
-
 void sintaxAnalyzer() {   
     printf(">>>>Start Syntax Analyzer\n");
     preanalisis = lexicalAnalyzer();
     while ( preanalisis != END  ) {
-        props_opc();//?
+            props_opc(); pair(';');
+        //props_opc();
         //expression(); pair(';');
     }
     printf("<<<<End Syntax Analyzer\n");
@@ -51,7 +51,7 @@ void factor() {
     printf(">>Start Factor\n");
     switch( preanalisis ) { 
         case '(':
-            pair('('); expression(); pair(')');
+            pair('('); emitter('(',EMPTY); expression(); pair(')'); emitter(')',EMPTY);
             break;
         case NUM:
             emitter(NUM, valcomplex); pair(NUM);
@@ -80,7 +80,7 @@ void prop() {           //?
     printf(">>Start prop\n");
     switch( preanalisis ) { 
         case ID:
-            emitter(ID, valcomplex); pair(ID); pair(':'); pair('='); expression(); 
+            emitter(ID, valcomplex); pair(ID); pair(':'); emitter(':',EMPTY); pair('='); emitter('=',EMPTY); expression(); 
             break;
         case IF:
             pair(IF); emitter(IF, EMPTY); expression(); pair(THEN); emitter(THEN, EMPTY); prop();
@@ -92,7 +92,7 @@ void prop() {           //?
             pair(BEGIN); emitter(BEGIN, EMPTY); props_opc(); pair(ENDO); emitter(ENDO, EMPTY);
             break;
         default:
-            error("Sintax Error");
+            expression();
             break;
     }
     printf("<<End prop\n");
