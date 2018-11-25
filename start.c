@@ -3,14 +3,18 @@
 struct entry keywords[] = {
   {"div", DIV},
   {"mod", MOD},
-  {"if", IF},	//?
+  {"if", IF},	
   {"then", THEN},
   {"while", WHILE},
   {"do", DO},
   {"begin", BEGIN},
   {"endo", ENDO},
+  {"sifalsovea", SIFALSOVEA},
+  {"siciertovea", SICIERTOVEA},
+  {"etiqueta", ETIQ},
+  {"vea", VEA},
+  {"alto", ALTO},
   {0,     0}
-  //anañdirlo a keywords?
 };
 
 void start(){

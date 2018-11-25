@@ -30,10 +30,31 @@ void emitter(int t, int tval) { /* genera  la salida  */
       printf("ENDO\n");
     break;
     case NUM:
-      printf("%d\n", tval); 
+      printf("inserta %d\n", tval); 
     break;
+    case ASIGN:
+      printf(":=\n");
+    break;
+    case SIFALSOVEA:
+      printf("sifalsovea %d\n",tval);
+    break;
+    case SICIERTOVEA:
+      printf("siciertovea %d\n",tval);
+    break;
+    case VEA:
+      printf("vea %d\n",tval);
+    break;
+    case ETIQ:
+      printf("etiqueta %d\n",tval);
+    break;
+    case ALTO:
+      printf("alto\n");
+    break;
+    /*case ID1:
+      printf("valord(%s)\n", symbolList[tval].aplex);
+    break;*/
     case ID:
-      printf("%s\n", symbolList[tval].aplex);
+      printf("valori(%s)\n", symbolList[tval].aplex);
     break;
     default:
       printf("complex %d,  valcomplex %d\n", t, tval);

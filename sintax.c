@@ -1,13 +1,13 @@
 #include "global.h"
 
 int preanalisis;
+int number = -2;
 
 void sintaxAnalyzer() {   
     printf(">>>>Start Syntax Analyzer\n");
     preanalisis = lexicalAnalyzer();
     while ( preanalisis != END  ) {
         props_opc(); pair(';');
-        //props_opc();
         //expression(); pair(';');
     }
     printf("<<<<End Syntax Analyzer\n");
@@ -60,7 +60,7 @@ void factor() {
             emitter(ID, valcomplex); pair(ID);  
             break;
         default:
-            error("Sintax Error");
+            error("Sintax Error in factor");
             break;
     }
     printf("<<End Factor\n");
@@ -71,28 +71,51 @@ void pair(int t) {
     if (preanalisis == t)
         preanalisis = lexicalAnalyzer();
     else 
-        error("Sintax Error");
+        error("Sintax Error in pair");
     printf("<<End Pair\n");
 }//end pair()
 
+int etiqnueva() {
+    number--;
+    return number;
+}
 
-void prop() {           //?
+void prop() {           
+    int etiq, prueba;
     printf(">>Start prop\n");
     switch( preanalisis ) { 
         case ID:
-            emitter(ID, valcomplex); pair(ID); pair(':'); emitter(':',EMPTY); pair('='); emitter('=',EMPTY); expression(); 
+            emitter(ID, valcomplex); pair(ID); pair(ASIGN); expression(); emitter(ASIGN, EMPTY);
             break;
-        case IF:
-            pair(IF); emitter(IF, EMPTY); expression(); pair(THEN); emitter(THEN, EMPTY); prop();
+        case IF: 
+            pair(IF); 
+            expression();
+            etiq = etiqnueva();
+            emitter(SIFALSOVEA, etiq); 
+            pair(THEN); 
+            prop(); 
+            emitter(ETIQ, etiq);
             break;
         case WHILE:
-            pair(WHILE); emitter(WHILE, EMPTY); expression(); pair(DO); emitter(DO, EMPTY); prop();
+            prueba = etiqnueva();
+            emitter(ETIQ, prueba);
+            pair(WHILE); 
+            expression();
+            etiq = etiqnueva();
+            emitter(SIFALSOVEA, etiq); 
+            pair(DO);
+            prop();
+            emitter(VEA, prueba);
+            emitter(ETIQ, etiq);
             break;
         case BEGIN:
-            pair(BEGIN); emitter(BEGIN, EMPTY); props_opc(); pair(ENDO); emitter(ENDO, EMPTY);
+            pair(BEGIN);
+            props_opc(); 
+            pair(ENDO);
+            emitter(ALTO, EMPTY); 
             break;
         default:
-            expression();
+            error("Sintax Error in prop");
             break;
     }
     printf("<<End prop\n");
@@ -112,11 +135,11 @@ void props_opc() {      //?
     printf("<<End props_opc\n");
 }//end props_opc()
 
-void lista_props() {    //?
+void lista_props() {    
     printf(">>Start lista_props\n");
-    int t;
-    prop();
-    while(1) {
+    //int t;
+    prop(); lista_props1();
+    /*while(1) {
         switch ( preanalisis ) {
             case ';':
                 t = preanalisis;
@@ -126,5 +149,20 @@ void lista_props() {    //?
                 printf("<<End lista_props\n");
                 return;
         }
-    }
+    }*/
+    printf("<<End lista_props\n");
 }//end lista_props()
+
+void lista_props1() {
+    printf(">>Start lista_props1\n");
+    switch( preanalisis ) {
+        case ';':
+            prop(); lista_props1();
+        break;
+        default:
+            printf("<<End lista_props1\n");
+        break;
+    }
+}//end prop1()
+//gcc -o Testeo sintax.o emitter.o error.o lexor.o main.o start.o symbols.o
+//if 3 then a := a + 2;

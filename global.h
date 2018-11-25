@@ -11,25 +11,33 @@
 #define ID  259 
 #define END 260
 
-#define IF	261 //?
-#define THEN 262 //?
-#define WHILE 263 //?
-#define DO 264 //?
-#define BEGIN 265 //?
-#define ENDO 266 //?
+#define IF	  261 
+#define THEN  262 
+#define WHILE 263 
+#define DO    264 
+#define BEGIN 265 
+#define ENDO  266 //?
+
+#define SIFALSOVEA 267
+#define SICIERTOVEA 268
+#define VEA   269
+#define ALTO  270
+#define ETIQ  271
+#define ASIGN 272
+#define ID1   273
 
 #define MAXSYMBOLS 100
 
 int valcomplex; 
 int lineNum;
+extern int number;
 
 struct entry {
   char *aplex; 
   int complex;
 };
 
-struct entry symbolList[MAXSYMBOLS]; //TODO- size not known (temp BUFFER)
-
+struct entry symbolList[MAXSYMBOLS]; //TODO - size not known (temp BUFFER)
 
 void error(char *m);
 int lexicalAnalyzer();
@@ -38,6 +46,7 @@ void expression();
 void term();
 void factor();
 void prop();
+void lista_props1();
 void props_opc();
 void lista_props();
 void pair(int t);
