@@ -2,20 +2,28 @@
 
 
 char lexbuf[BUFFER];
-int lineNum = 1;
-int tokenVal = EMPTY;
+int lineNum             = 1;
+int tokenVal            = EMPTY;
 
 
-
+char prueba[]           = "if A then B:=C;\n  ";
+int plen                = sizeof(prueba)/sizeof(char);
+int count               = 0;
+char* cp                = prueba;
 
 
 
 int lexicalAnalyzer() {
+    printf("Pruebas------------------------\n\n");
+    printf("Codigo:\n\n%s\n\n\n", prueba);
 
     int c;
     while (1) {
 
-        c = getchar();
+        //c = getchar();
+        c = prueba[count];
+        count++;
+        cp++;
 
         if ( c == ' ' || c == '\t' ){
             ; // Do nothing
@@ -26,9 +34,13 @@ int lexicalAnalyzer() {
 
 
         }else if ( isdigit(c) ) {   
-            ungetc(c, stdin);
-            scanf("%d", &tokenVal);
-            
+            //ungetc(c, stdin);
+            count--;
+            cp--;
+            //scanf("%d", &tokenVal);
+            //strcpy(prueba[count],&tokenVal);//TODO, get number
+            sscanf(cp, "%d", &tokenVal);
+
             return NUM;
 
 
@@ -37,7 +49,11 @@ int lexicalAnalyzer() {
 
             while  ( isalnum(c) ) {   
                 lexbuf[b] = c;
-                c = getchar();
+                //c = getchar();
+                c = prueba[count];
+                count++;
+                cp++;
+
                 b++;
                 if ( b >= BUFFER )
                     error("Compiler error");
@@ -45,8 +61,11 @@ int lexicalAnalyzer() {
 
             lexbuf[b]  =  EOL;
 
-            if (c != EOF)
-                ungetc(c, stdin);
+            if (c != EOF){
+                //ungetc(c, stdin);
+                count--;
+                cp--;
+            }
 
             p = find(lexbuf);
 
@@ -59,7 +78,10 @@ int lexicalAnalyzer() {
 
 
         }else if ( c == ':' ) {
-            c = getchar();
+            //c = getchar();
+            c = prueba[count];
+            count++;
+            cp++;
 
             if ( c == '=' ) return ASIGN;
 

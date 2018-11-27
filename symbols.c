@@ -5,7 +5,7 @@
 
 
 char lexemes[STRMAX];
-int lastChar = -1;                            // last position used for lexemes
+int lastChar = -1;                              // last position used for lexemes
 struct entry symbolTable[MAXSYMBOLS];
 int lastEntry = 0;                              // last position used in symbolTable
 
