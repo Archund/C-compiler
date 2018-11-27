@@ -6,24 +6,23 @@ int lineNum             = 1;
 int tokenVal            = EMPTY;
 
 
-char prueba[]           = "if A then B:=C;\n  ";
-int plen                = sizeof(prueba)/sizeof(char);
-int count               = 0;
-char* cp                = prueba;
+
 
 
 
 int lexicalAnalyzer() {
-    printf("Pruebas------------------------\n\n");
-    printf("Codigo:\n\n%s\n\n\n", prueba);
+
 
     int c;
     while (1) {
 
-        //c = getchar();
-        c = prueba[count];
-        count++;
-        cp++;
+        //c = fgetc(in);
+        c = getchar();
+
+        if(c== EOF){
+            exit(0);
+        }
+
 
         if ( c == ' ' || c == '\t' ){
             ; // Do nothing
@@ -34,12 +33,12 @@ int lexicalAnalyzer() {
 
 
         }else if ( isdigit(c) ) {   
-            //ungetc(c, stdin);
-            count--;
-            cp--;
-            //scanf("%d", &tokenVal);
-            //strcpy(prueba[count],&tokenVal);//TODO, get number
-            sscanf(cp, "%d", &tokenVal);
+            //ungetc(c, in);
+            ungetc(c,stdin);
+
+            //fscanf(in,"%d", &tokenVal);
+            scanf("%d", &tokenVal);
+
 
             return NUM;
 
@@ -49,10 +48,9 @@ int lexicalAnalyzer() {
 
             while  ( isalnum(c) ) {   
                 lexbuf[b] = c;
-                //c = getchar();
-                c = prueba[count];
-                count++;
-                cp++;
+                //c = fgetc(in);
+                c = getchar();
+
 
                 b++;
                 if ( b >= BUFFER )
@@ -62,9 +60,9 @@ int lexicalAnalyzer() {
             lexbuf[b]  =  EOL;
 
             if (c != EOF){
-                //ungetc(c, stdin);
-                count--;
-                cp--;
+                //ungetc(c, in);
+                ungetc(c, stdin);
+
             }
 
             p = find(lexbuf);
@@ -78,10 +76,9 @@ int lexicalAnalyzer() {
 
 
         }else if ( c == ':' ) {
-            //c = getchar();
-            c = prueba[count];
-            count++;
-            cp++;
+            //c = fgetc(in);
+            c = getchar();
+
 
             if ( c == '=' ) return ASIGN;
 

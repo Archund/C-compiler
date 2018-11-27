@@ -35,6 +35,7 @@ int tokenVal;
 int lineNum;
 extern int number;
 
+FILE* in;
 
 
 struct entry {

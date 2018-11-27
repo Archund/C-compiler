@@ -92,7 +92,7 @@ int prop() {
             //expression();
             return 0;
 
-}   } //End prop()
+} return 0;  } //End prop()
 
 
 

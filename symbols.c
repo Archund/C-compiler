@@ -34,7 +34,7 @@ int insert(char s[], int clex) {
     if (lastEntry + 1 >= MAXSYMBOLS)
         error("Symbol list is full");
     if (lastChar + lon + 1 >= STRMAX)
-        error("Lexmas Matrix full");
+        error("Lexemes Matrix is full");
 
     lastEntry++;
 
