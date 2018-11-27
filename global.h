@@ -18,13 +18,13 @@
 #define BEGIN 265 
 #define ENDO  266 //?
 
-#define SIFALSOVEA 267
-#define SICIERTOVEA 268
-#define VEA   269
-#define ALTO  270
-#define ETIQ  271
-#define ASIGN 272
-#define ID1   273
+#define FALSO  267
+#define CIERTO 268
+#define VEA    269
+#define ALTO   270
+#define ETIQ   271
+#define ASIGN  272
+#define IDL    273
 
 #define MAXSYMBOLS 100
 
@@ -45,12 +45,12 @@ void sintaxAnalyzer();
 void expression();
 void term();
 void factor();
-void prop();
-void lista_props1();
+int prop();
 void props_opc();
-void lista_props();
+int lista_props();
 void pair(int t);
 void emitter(int t, int tval);
 void start();
 int find(char s[]);
 int insert(char s[], int clex);
+int etiqnueva();
