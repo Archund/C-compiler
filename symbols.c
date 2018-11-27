@@ -1,36 +1,49 @@
 #include "global.h"
 #include <string.h>
-#define MAXLEX 999        /*  tamaño de  la matriz de  lexemas  */
-//MAXSYMBOLS MOVED TO MAIN
 
-char lexemas[MAXLEX];
-int lastLexmas = -1;          /*  última posición usada en  los  lexemas  */
-struct entry symbolList[MAXSYMBOLS];
-int lastEntry = 0;           /*  última posición usada en symbolList */
+#define STRMAX 999                              // size of lexemes table
 
-int find(char s[]) {    /* devuelve  la posición del elemento de entryde s */
-    printf(">>Start find for %s\n",s);
-    int p;
-    for (p = lastEntry; p>0; p = p-1)
-        if (strcmp(symbolList[p].aplex, s) == 0)
+
+char lexemes[STRMAX];
+int lastChar = -1;                            // last position used for lexemes
+struct entry symbolTable[MAXSYMBOLS];
+int lastEntry = 0;                              // last position used in symbolTable
+
+
+
+
+//returns the position of input s
+int find(char s[]) {
+
+    for (int p = lastEntry; p>0; p = p-1) {
+        if (strcmp(symbolTable[p].lexptr, s) == 0) {
             return p;
-    return 0;
-}//end find()
+    }   }
 
-int insert(char s[], int clex) {  /* devuelve  la posición del elemento deentry de s  */
-    printf(">>Start insert of %s\n",s);
-    int lon;
-    lon = strlen(s);            /*  strlen evalúa  la longitud de s  */
+    return 0;
+
+} //End find()
+
+
+
+//returns the position of the entry struct of input s
+int insert(char s[], int clex) {
+    
+    int lon = strlen(s);
+
     if (lastEntry + 1 >= MAXSYMBOLS)
         error("Symbol list is full");
-    if (lastLexmas + lon + 1 >= MAXLEX)
+    if (lastChar + lon + 1 >= STRMAX)
         error("Lexmas Matrix full");
 
     lastEntry++;
-    symbolList[lastEntry].complex = clex;
-    symbolList[lastEntry].aplex = &lexemas[lastLexmas + 1];
-    lastLexmas = lastLexmas + lon + 1;
-    strcpy( symbolList[lastEntry].aplex, s );
-    printf(">>End Insert\n");
+
+    symbolTable[lastEntry].token = clex;
+    symbolTable[lastEntry].lexptr = &lexemes[lastChar + 1];
+    lastChar = lastChar + lon + 1;
+
+    strcpy( symbolTable[lastEntry].lexptr, s );
+    
     return lastEntry;
-}//end insert()
+
+} //End insert()

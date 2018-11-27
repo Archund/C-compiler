@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
+
 #define BUFFER 128 
 #define EMPTY -1 
 #define EOL '\0'
@@ -16,7 +17,7 @@
 #define WHILE 263 
 #define DO    264 
 #define BEGIN 265 
-#define ENDO  266 //?
+#define ENDO  266 //todo
 
 #define FALSO  267
 #define CIERTO 268
@@ -28,16 +29,23 @@
 
 #define MAXSYMBOLS 100
 
-int valcomplex; 
+
+int tokenVal; 
 int lineNum;
 extern int number;
 
+
+
 struct entry {
-  char *aplex; 
-  int complex;
+  char *lexptr; 
+  int token;
 };
 
-struct entry symbolList[MAXSYMBOLS]; //TODO - size not known (temp BUFFER)
+struct entry symbolTable[MAXSYMBOLS]; //TODO - size not known (temp BUFFER)
+
+
+
+
 
 void error(char *m);
 int lexicalAnalyzer();
