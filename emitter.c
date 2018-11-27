@@ -2,7 +2,7 @@
 
 void emitter(int t, int tval) { /* genera  la salida  */
   switch(t) {
-    case '+': case '-': case '*': case '/': case '(': case ')': 
+    case '+': case '-': case '*': case '/':
       printf("%c\n", t); 
     break;
     case DIV:
@@ -35,10 +35,10 @@ void emitter(int t, int tval) { /* genera  la salida  */
     case ASIGN:
       printf(":=\n");
     break;
-    case SIFALSOVEA:
+    case FALSO:
       printf("sifalsovea %d\n",tval);
     break;
-    case SICIERTOVEA:
+    case CIERTO:
       printf("siciertovea %d\n",tval);
     break;
     case VEA:
@@ -50,11 +50,11 @@ void emitter(int t, int tval) { /* genera  la salida  */
     case ALTO:
       printf("alto\n");
     break;
-    /*case ID1:
-      printf("valord(%s)\n", symbolList[tval].aplex);
-    break;*/
-    case ID:
+    case IDL:
       printf("valori(%s)\n", symbolList[tval].aplex);
+    break;
+    case ID:
+      printf("valord(%s)\n", symbolList[tval].aplex);
     break;
     default:
       printf("complex %d,  valcomplex %d\n", t, tval);

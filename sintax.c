@@ -51,7 +51,7 @@ void factor() {
     printf(">>Start Factor\n");
     switch( preanalisis ) { 
         case '(':
-            pair('('); emitter('(',EMPTY); expression(); pair(')'); emitter(')',EMPTY);
+            pair('('); expression(); pair(')'); 
             break;
         case NUM:
             emitter(NUM, valcomplex); pair(NUM);
@@ -80,32 +80,36 @@ int etiqnueva() {
     return number;
 }
 
-void prop() {           
-    int etiq, prueba;
+int prop() {           
+    int etiq, etiq2;
     printf(">>Start prop\n");
     switch( preanalisis ) { 
         case ID:
-            emitter(ID, valcomplex); pair(ID); pair(ASIGN); expression(); emitter(ASIGN, EMPTY);
+            emitter(IDL, valcomplex); 
+            pair(ID); 
+            pair(ASIGN); 
+            expression(); 
+            emitter(ASIGN, valcomplex);
             break;
         case IF: 
             pair(IF); 
             expression();
             etiq = etiqnueva();
-            emitter(SIFALSOVEA, etiq); 
+            emitter(FALSO, etiq); 
             pair(THEN); 
             prop(); 
             emitter(ETIQ, etiq);
             break;
         case WHILE:
-            prueba = etiqnueva();
-            emitter(ETIQ, prueba);
+            etiq2 = etiqnueva();
+            emitter(ETIQ, etiq2);
             pair(WHILE); 
             expression();
             etiq = etiqnueva();
-            emitter(SIFALSOVEA, etiq); 
+            emitter(FALSO, etiq); 
             pair(DO);
             prop();
-            emitter(VEA, prueba);
+            emitter(VEA, etiq2);
             emitter(ETIQ, etiq);
             break;
         case BEGIN:
@@ -115,54 +119,35 @@ void prop() {
             emitter(ALTO, EMPTY); 
             break;
         default:
-            error("Sintax Error in prop");
-            break;
+            //expression();
+            return 0;
     }
     printf("<<End prop\n");
 }//end prop()
 
-void props_opc() {      //?
+void props_opc() {      
     printf(">>Start props_opc\n");
     lista_props();
-    /* switch ( preanalisis ) {
-        case '?':
-            lista_props();
-            break;
-        default:
-            printf("<<End props_opc\n");
-            break; 
-    } */
     printf("<<End props_opc\n");
 }//end props_opc()
 
-void lista_props() {    
+int lista_props() {    
     printf(">>Start lista_props\n");
-    //int t;
-    prop(); lista_props1();
-    /*while(1) {
+    int t;
+    prop();
+    while(1) {
         switch ( preanalisis ) {
             case ';':
                 t = preanalisis;
-                pair(preanalisis); prop(); emitter(t, EMPTY);
+                pair(preanalisis); prop(); lista_props();
                 continue;
             default:
                 printf("<<End lista_props\n");
-                return;
+                return 0;
         }
-    }*/
+    }
     printf("<<End lista_props\n");
 }//end lista_props()
 
-void lista_props1() {
-    printf(">>Start lista_props1\n");
-    switch( preanalisis ) {
-        case ';':
-            prop(); lista_props1();
-        break;
-        default:
-            printf("<<End lista_props1\n");
-        break;
-    }
-}//end prop1()
 //gcc -o Testeo sintax.o emitter.o error.o lexor.o main.o start.o symbols.o
 //if 3 then a := a + 2;

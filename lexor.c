@@ -27,7 +27,7 @@ int lexicalAnalyzer() {
                 t = getchar();
                 b++;
                 if ( b >= BUFFER )
-                    error("Compiler eror");
+                    error("Compiler error");
             }
             buflex[b]  =  EOL;
             if (t != EOF)
