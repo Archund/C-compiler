@@ -2,4 +2,5 @@ if A then B:=C;
 while true do var:=3;
 begin 
     if C then B:=A;
+    if B then C:=A;
 end

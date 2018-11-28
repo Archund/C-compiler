@@ -1,0 +1,25 @@
+#!/bin/bash
+ 
+
+printf "%s\n" "--Running compiler------------------------"
+printf "\n%s\n" "Testing mode? (y/n)"
+read input
+
+while [[ $input != 'y' && $input != 'n' ]];  do
+    printf "%s\n" "Please enter y or n"
+    read input
+done
+
+if [[ $input == 'y' ]]; then
+    printf "\n%s\n" "--Pruebas---------------------------------"
+    cat 'pruebas.txt'
+    printf "\n\n%s\n\n" "------------------------------------------"
+
+    cat 'pruebas.txt' | ./bin/exec
+else
+    printf "\n%s\n\n" "--START PROGRAM---------------------------"
+
+    ./bin/exec
+fi
+
+
