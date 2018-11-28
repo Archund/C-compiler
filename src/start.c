@@ -8,7 +8,7 @@ struct entry keywords[] = {
     {"while",           WHILE},
     {"do",              DO},
     {"begin",           BEGIN},
-    {"endo",            ENDO},
+    {"end",             ENDO},
     {"sifalsovea",      FALSO},
     {"siciertovea",     CIERTO},
     {"etiqueta",        ETIQ},
