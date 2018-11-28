@@ -33,7 +33,7 @@ int lista_props() {
         switch ( lookahead ) {
 
             case ';':
-                pair(lookahead); prop(); lista_props();
+                pair(lookahead); prop();
                 continue;
 
             default:
@@ -117,14 +117,13 @@ void expression(){
 
 // GLC rule for term
 void term() { 
-    int t;
+
     factor();
     while(1) {
         switch ( lookahead ) {
 
             case '*': case '/': case DIV: case MOD:
-                t = lookahead;
-                pair(lookahead); factor(); emitter(t, EMPTY);
+                pair(lookahead); factor(); emitter(lookahead, EMPTY);
                 continue;
 
             default:

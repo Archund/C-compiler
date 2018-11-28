@@ -9,6 +9,10 @@ void emitter(int t, int tval) {
             printf("%c\n", t); 
         break;
 
+        case '(': case ')':
+            //print nothing
+        break;
+
 
         case DIV:
             printf("DIV\n");

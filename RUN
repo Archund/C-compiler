@@ -12,10 +12,10 @@ done
 
 if [[ $input == 'y' ]]; then
     printf "\n%s\n" "--Pruebas---------------------------------"
-    cat 'pruebas.txt'
+    cat 'pruebas'
     printf "\n\n%s\n\n" "------------------------------------------"
 
-    cat 'pruebas.txt' | ./bin/exec
+    cat 'pruebas' | ./bin/exec
 else
     printf "\n%s\n\n" "--START PROGRAM---------------------------"
 
