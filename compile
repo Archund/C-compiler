@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcc -o bin/exec main.c global.h start.c symbols.c sintax.c lexor.c error.c emitter.c
+gcc -std=c11 -o bin/exec src/main.c src/global.h src/start.c src/symbols.c src/parser.c src/lexer.c src/error.c src/emitter.c

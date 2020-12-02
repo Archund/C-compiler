@@ -1,0 +1,19 @@
+if A then B:=C;
+if 0+1 then C:=D;
+
+while true do var:=3;
+
+begin 
+    if C then B:=A;
+    if X/(Z+Y) then C:=X;
+end;
+
+while 0 do
+    if C then B:=4;
+;
+
+begin
+    while 3*X do
+        if X/2 then Y:=Z;
+    ;
+end;

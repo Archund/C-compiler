@@ -1,12 +1,13 @@
 #include "global.h"
 
-int main() {
-    printf(">>>>Program Start\n");
+//FILE* in;
 
+int main() {
+
+    //in=fopen ("pruebas.txt","r");
     start();
     sintaxAnalyzer();
     
-    printf(">>>>Program End\n");
     return 0;
   
 }//End main()
